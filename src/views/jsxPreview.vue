@@ -1,6 +1,6 @@
 <script>
 import render from '@/utils/render.js'
-import mockData from '../admin/mockData.js'
+import mockData from './mockData.js'
 import { trigger } from '@/components/DynamicForm/components/generator/config.js'
 /**
  * 校验组织机构组件是否为空
@@ -254,17 +254,21 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
-.preview-container 
-  margin 3rem auto 1rem
-  border-radius 6px
-  box-shadow 0 0 15px rgba(0, 0, 0, .1)
+<style lang="less" scoped>
+.preview-container{
+  margin: 3rem auto 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+} 
   
-  .width-slider
-    width  150px
-    position absolute
-    top 0
-    right 2rem
+  
+  .width-slider{
+    width:  150px;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+  }
+    
 
 .showDivider.form-container { 
   margin-bottom: 2rem; 
