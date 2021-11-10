@@ -26,7 +26,7 @@ const setFcOrgSelectRule = ( conf, ctx ) => {
   }
 }
 /**
- * 收集表单必填项并组装成ElementUI表单校验得rules选项
+ * 收集表单必填项并组单校装成ElementUI表验得rules选项
  * 表格除外 表格自带校验
  */
 function buildRules ( conf, ctx ) {
@@ -62,6 +62,8 @@ var _isMounted = false // 收集默认值 渲染完成之后防止重复收集�
 const buildData = (ctx, value, prop) => setData(ctx, value, prop, true)
 
 const layouts = {
+  //ctx:this
+  //conf：每一项组件的数据
   colFormItem: function (conf,  h, ctx, isList = false,) {
     buildRules(conf, ctx)
     !_isMounted && buildData(ctx, conf.defaultValue, conf.vModel)
@@ -143,8 +145,8 @@ const layouts = {
 
 export default {
   data () {
-    var confGlobal = this.$route.params.formData || mockData.formData
-    Object.freeze(confGlobal)
+    var confGlobal = this.$route.params.formData || mockData.formData;//要展示的预览数据
+    Object.freeze(confGlobal);//冻结要预览页面的数据
     return {
       tableRefs: {},
       drawerTitle: '',
