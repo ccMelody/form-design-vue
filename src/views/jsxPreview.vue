@@ -8,7 +8,7 @@ import { trigger } from '@/components/DynamicForm/components/generator/config.js
 const setFcOrgSelectRule = ( conf, ctx ) => {
   return { 
     validator: (rule, value, callback) => {
-      var val = ctx[ctx.confGlobal.formModel][rule.field]
+      var val = ctx.formModel[rule.field]
       if (Object.keys(val || {}).length === 0) {
         callback()
         return
@@ -48,13 +48,13 @@ function buildRules ( conf, ctx ) {
       }
     } )
   }
-  ctx.rules[conf.vModel] = rules
+  ctx.ruleList[conf.vModel] = rules
 }
 
 
 var setData = (ctx, val, prop, init = false) => {
   if (!prop) return
-  ctx.$set(ctx[ctx.confGlobal.formModel], prop, val)
+  ctx.$set(ctx.formModel, prop, val)
 }
 
 var _isMounted = false // 收集默认值 渲染完成之后防止重复收集默认值
@@ -88,9 +88,9 @@ const layouts = {
                   label={isList ? '' : conf.label} 
                   prop={conf.vModel}>
                     <render
-                    formData={ctx[ctx.confGlobal.formModel]}
+                    formData={ctx.formModel}
                     conf={conf} 
-                    value={ctx[ctx.confGlobal.formModel][conf.vModel]} 
+                    value={ctx.formModel[conf.vModel]} 
                     ref={conf.rowType === 'table' ? conf.vModel : undefined} 
                     onInput={handleInput} 
                     />
@@ -154,8 +154,8 @@ export default {
       drawerVisible: false,
       containerWidth: 66,
       confGlobal,
-      [confGlobal.formModel]: {},
-      [confGlobal.formRules]: {}
+      formModel: {},
+      ruleList: {}
     }
   },
   mounted(){
@@ -172,7 +172,7 @@ export default {
           message: '请在控制台中查看数据输出',
           position: 'bottom-right'
         });
-        console.log('表单数据', this[this.confGlobal.formModel])
+        console.log('表单数据', this.formModel)
         // TODO 提交表单
       })
     },
@@ -193,7 +193,7 @@ export default {
       let valid = true
       Object.keys(this.tableRefs).forEach(vModel => {
         const res = this.$refs[vModel].$children[0].submit()  // 返回false或表单数据
-        res ? (this[this.confGlobal.formModel][vModel] = res) : (valid = false)
+        res ? (this.formModel[vModel] = res) : (valid = false)
       })
       return valid
     },
@@ -224,8 +224,8 @@ export default {
       const content = this.confGlobal.fields.map(c => layouts[c.layout](c, h, this))
       const formObject = {
         props: {
-          model: this[this.confGlobal.formModel],
-          rules: this[this.confGlobal.formRules],
+          model: this.formModel,
+          rules: this.ruleList,
           size: this.confGlobal.size,
           labelWidth: this.confGlobal.labelWidth + 'px',
           labelPosition: this.confGlobal.labelPosition || undefined
@@ -243,7 +243,16 @@ export default {
     }
   },
 
+  initDefaultData(){
+    this.confGlobal.fields.forEach(field => {
+      this.formModel[field.vModel] = field.defaultValue;
+    })
+  },
+
   render (h) {
+    if (!this.confGlobal) {
+      return <div v-loading="true" class="loading-mask"></div>
+    }
     return  <div class="preview-container" style={'width:' + this.containerWidth + '%;'}>
               <el-row gutter={this.confGlobal.gutter} style="padding: 2rem 2rem 0;">
                 {this.buildForm(h)}
@@ -271,7 +280,10 @@ export default {
     right: 2rem;
   }
     
-
+.loading-mask {
+  width: 100vw;
+  height: 100vh;
+}
 .showDivider.form-container { 
   margin-bottom: 2rem; 
 }

@@ -3,11 +3,11 @@ import PROVINCE from './province.js'
 //对于表单属性的配置
 export const formConf = {
   formRef: 'elForm',//表单名称
-  formModel: 'formData',
+  // formModel: 'formData',//表单模型
   size: 'small',//表单尺寸
   labelPosition: 'right',//标签对齐
   labelWidth: 100,//标签宽度
-  formRules: 'rules',
+  // formRules: 'rules',//校验模型
   gutter: 15,//栅格间隔
   disabled: false,
   span: 24,

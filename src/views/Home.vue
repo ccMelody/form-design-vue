@@ -6,7 +6,7 @@
       </div>
       <el-button size="small" class="publish-btn" @click="publish">发布</el-button>
     </header>
-    <section class="page__content">
+    <section class="page__content"  v-if="mockData">
       <DynamicForm
         ref="formDesign"
         :conf="mockData.formData"

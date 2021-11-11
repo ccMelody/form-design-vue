@@ -263,33 +263,44 @@ export default {
     "fields": [
       {
         "cmpType": "common",
-        label: '组织机构',
-        tag: 'fc-org-select',
-        tagIcon: 'dept',
-        defaultValue: { dep: [{ "nodeId": 1, "deptId": 1, "deptName": "xxx公司" }] },
-        tabList: ['dep'],
-        buttonType: 'button',
-        title: '组织机构',
-        searchable: true,
-        maxNum: 1,
-        tagConfig: {
-          type: 'info',
-          closable: true,
-          'disable-transitions': false,
-          hit: false,
-          color: undefined,
-          size: 'small',
-          effect: 'light'
+        "label": "组织机构",
+        "tag": "fc-org-select",
+        "tagIcon": "dept",
+        "defaultValue": {
+          "dep": [
+            {
+              "nodeId": 1,
+              "deptId": 1,
+              "deptName": "xxxs公司"
+            }
+          ]
         },
-        style: { width: '100%' },
-        span: 24,
-        labelWidth: null,
-        disabled: false,
-        required: true,//是否必填，可作为流程条件
-        regList: [],
-        changeTag: true,
-        proCondition: true,
-        asSummary: false,
+        "tabList": [
+          "dep"
+        ],
+        "buttonType": "button",
+        "title": "组织机构",
+        "searchable": true,
+        "maxNum": 1,
+        "tagConfig": {
+          "type": "info",
+          "closable": true,
+          "disable-transitions": false,
+          "hit": false,
+          "size": "small",
+          "effect": "light"
+        },
+        "style": {
+          "width": "100%"
+        },
+        "span": 24,
+        "labelWidth": null,
+        "disabled": false,
+        "required": true,
+        "regList": [],
+        "changeTag": true,
+        "proCondition": true,
+        "asSummary": false,
         "layout": "colFormItem",
         "formId": 20,
         "renderKey": 1590641662215,
@@ -553,15 +564,15 @@ export default {
       }
     ],
     "formRef": "elForm",//表单名称
-    "formModel": "formData",
     "size": "small",//表单尺寸
     "labelPosition": "right",//标签对齐
     "labelWidth": 100,//标签宽度
-    "formRules": "rules",
     "gutter": 15,//栅格间隔，用于el-row标签上的gutter属性上
     "disabled": false,//禁用表单
     "span": 12,
     "formBtns": true,//表单按钮
+    
+
   },
   "advancedSetting": {
     "autoRepeat": true,
